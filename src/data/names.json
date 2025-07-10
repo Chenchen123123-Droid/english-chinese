@@ -1,0 +1,42 @@
+{
+  "Michael": [
+    { "name": "麦克", "type": "音译", "meaning": "直接音译，常见男性名字" },
+    { "name": "明凯", "type": "意译", "meaning": "光明与胜利的象征" },
+    { "name": "铭瀚", "type": "创意型", "meaning": "有智慧与广阔胸怀" },
+    { "name": "迈航", "type": "音意结合", "meaning": "勇往直前，迈步远航" },
+    { "name": "铭皓", "type": "意译", "meaning": "铭记光明，寓意有才华" },
+    { "name": "墨阳", "type": "文艺型", "meaning": "文气十足，阳光与深沉并存" }
+  ],
+  "Sarah": [
+    { "name": "莎拉", "type": "音译", "meaning": "直接音译，优雅女性名字" },
+    { "name": "思雅", "type": "意译", "meaning": "思维敏捷，举止优雅" },
+    { "name": "诗涵", "type": "创意型", "meaning": "诗意盎然，内涵丰富" },
+    { "name": "舒然", "type": "音意结合", "meaning": "舒适自然，心境平和" },
+    { "name": "淑华", "type": "意译", "meaning": "淑女风范，才华横溢" },
+    { "name": "苏雅", "type": "文艺型", "meaning": "温柔如苏，优雅脱俗" }
+  ],
+  "David": [
+    { "name": "大卫", "type": "音译", "meaning": "直接音译，经典男性名字" },
+    { "name": "德威", "type": "意译", "meaning": "品德高尚，威望卓著" },
+    { "name": "达维", "type": "创意型", "meaning": "通达事理，维护正义" },
+    { "name": "德为", "type": "音意结合", "meaning": "以德为先，品格高尚" },
+    { "name": "道维", "type": "意译", "meaning": "崇尚道德，维护真理" },
+    { "name": "丹维", "type": "文艺型", "meaning": "赤诚之心，坚守信念" }
+  ],
+  "Emma": [
+    { "name": "艾玛", "type": "音译", "meaning": "直接音译，时尚女性名字" },
+    { "name": "恩玛", "type": "意译", "meaning": "恩泽如玉，温润如玛" },
+    { "name": "忆玛", "type": "创意型", "meaning": "记忆深刻，珍贵如玛瑙" },
+    { "name": "怡玛", "type": "音意结合", "meaning": "心情愉悦，美好如玛瑙" },
+    { "name": "雅玛", "type": "意译", "meaning": "优雅脱俗，品质如玛瑙" },
+    { "name": "颜玛", "type": "文艺型", "meaning": "容颜如花，珍贵如玛瑙" }
+  ],
+  "John": [
+    { "name": "约翰", "type": "音译", "meaning": "直接音译，经典英文名" },
+    { "name": "俊涵", "type": "意译", "meaning": "俊朗有为，内涵深厚" },
+    { "name": "君瀚", "type": "创意型", "meaning": "君子风范，学识渊博" },
+    { "name": "峻航", "type": "音意结合", "meaning": "高峻如山，远航如海" },
+    { "name": "军瀚", "type": "意译", "meaning": "将军风范，博学多识" },
+    { "name": "骏涵", "type": "文艺型", "meaning": "骏马奔腾，涵养深厚" }
+  ]
+}
