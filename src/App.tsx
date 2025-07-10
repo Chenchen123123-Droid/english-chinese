@@ -9,6 +9,7 @@ import FAQ from './components/FAQ';
 import FAQPage from './components/FAQPage';
 import PricingPlans from './components/PricingPlans';
 import PurpleRippleEffect from './components/PurpleRippleEffect';
+import Fireworks from './components/Fireworks';
 import namesData from './data/names.json';
 import { generateChineseNames } from './services/deepseekApi';
 import { useLanguage } from './contexts/LanguageContext';
@@ -31,6 +32,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [copiedName, setCopiedName] = useState('');
   const [currentPage, setCurrentPage] = useState('home');
+  const [showFireworks, setShowFireworks] = useState(false);
 
   const handleSearch = async (name: string) => {
     setIsLoading(true);
@@ -47,12 +49,25 @@ function App() {
       }
       
       setResults(foundResults);
+      
+      // Show fireworks when results are generated
+      setShowFireworks(true);
+      // Hide fireworks after 4 seconds
+      setTimeout(() => {
+        setShowFireworks(false);
+      }, 5000);
     } catch (error) {
       console.error('生成名字时出错:', error);
       // 如果API调用失败，尝试使用本地数据
       const data = namesData as NamesData;
       const fallbackResults = data[name] || [];
       setResults(fallbackResults);
+      
+      // Still show fireworks even with fallback results
+      setShowFireworks(true);
+      setTimeout(() => {
+        setShowFireworks(false);
+      }, 5000);
     } finally {
       setIsLoading(false);
     }
@@ -92,6 +107,9 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-purple-950 via-purple-900 to-red-950 relative overflow-hidden">
       {/* Mouse movement purple ripple effect */}
       <PurpleRippleEffect />
+      
+      {/* Show fireworks when names are generated */}
+      {showFireworks && <Fireworks />}
       
       {/* 恐怖圣诞元素 - 左上角 */}
       <div className="absolute top-16 left-4 w-32 h-32 pointer-events-none z-10">
