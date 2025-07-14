@@ -3,15 +3,14 @@ import axios from 'axios';
 // DeepSeek API配置
 // 使用新的API密钥 - 使用内测版API密钥
 const DEEPSEEK_API_KEY = 'sk-vs9057822df3e2c693e7545603490193';
-// 直接使用DeepSeek的API地址 - 使用内测版API
-const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
+// 使用自定义API代理避免CORS问题
+const DEEPSEEK_API_URL = '/api/deepseek-proxy';
 
 // 创建一个axios实例，处理CORS
 const apiClient = axios.create({
   baseURL: DEEPSEEK_API_URL,
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${DEEPSEEK_API_KEY}`,
   }
 });
 
