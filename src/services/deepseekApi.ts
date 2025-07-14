@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 // DeepSeek API配置
-const DEEPSEEK_API_KEY = 'sk-d2d27c208fff41cdbd903ffa237830d4';
-// 使用Vite代理
-const DEEPSEEK_API_URL = '/api/deepseek/v1/chat/completions';
+// 使用新的API密钥 - 使用内测版API密钥
+const DEEPSEEK_API_KEY = 'sk-vs9057822df3e2c693e7545603490193';
+// 直接使用DeepSeek的API地址 - 使用内测版API
+const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
 
 // 创建一个axios实例，处理CORS
 const apiClient = axios.create({
@@ -35,6 +36,8 @@ export async function generateChineseNames(
   englishName: string
 ): Promise<ChineseName[]> {
   try {
+    console.log('正在调用DeepSeek API生成名字...', englishName);
+    
     const response = await apiClient.post<DeepSeekResponse>(
       '',
       {
@@ -50,6 +53,7 @@ export async function generateChineseNames(
           },
         ],
         temperature: 0.7,
+        max_tokens: 2000,
       }
     );
 
@@ -62,15 +66,20 @@ export async function generateChineseNames(
     const jsonMatch = content.match(/\[.*?\]/s);
     
     if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]);
+      try {
+        return JSON.parse(jsonMatch[0]);
+      } catch (parseError) {
+        console.error('JSON解析错误:', parseError);
+      }
     }
     
     // 如果没有找到有效的JSON，尝试手动解析
+    console.log('尝试手动解析响应内容...');
     const nameMatches = content.match(/name["\s:]+([^"]+)/g);
     const typeMatches = content.match(/type["\s:]+([^"]+)/g);
     const meaningMatches = content.match(/meaning["\s:]+([^"]+)/g);
     
-          if (nameMatches && typeMatches && meaningMatches && 
+    if (nameMatches && typeMatches && meaningMatches && 
         nameMatches.length === typeMatches.length && typeMatches.length === meaningMatches.length) {
       const results: ChineseName[] = [];
       
@@ -79,7 +88,7 @@ export async function generateChineseNames(
         const typeMatch = typeMatches[i].match(/type["\s:]+([^"]+)/);
         const meaningMatch = meaningMatches[i].match(/meaning["\s:]+([^"]+)/);
         
-                  if (nameMatch && typeMatch && meaningMatch) {
+        if (nameMatch && typeMatch && meaningMatch) {
             const name = nameMatch[1].trim();
             const type = typeMatch[1].trim();
             const meaning = meaningMatch[1].trim();
@@ -96,16 +105,43 @@ export async function generateChineseNames(
               meaning, 
               meaning_en: meaning 
             });
-          }
+        }
       }
       
       return results;
     }
     
+    // 如果还是无法解析，尝试全文匹配
+    console.log('无法解析JSON，尝试全文匹配...');
+    const fullText = content;
+    if (fullText.includes('中文名') || fullText.includes('音译') || fullText.includes('意译')) {
+      // 简单创建一些结果，即使没有正确解析
+      return [
+        {
+          name: '解析错误-请重试',
+          name_en: 'Error-Please try again',
+          type: '错误',
+          type_en: 'Error',
+          meaning: '无法解析AI响应，请再次尝试',
+          meaning_en: 'Could not parse AI response, please try again'
+        }
+      ];
+    }
+    
+    console.log('无法生成名字，返回空数组');
     // 如果还是无法解析，返回空数组
     return [];
   } catch (error) {
     console.error('调用DeepSeek API出错:', error);
-    return [];
+    
+    // 返回友好的错误信息
+    return [{
+      name: '连接错误',
+      name_en: 'Connection Error',
+      type: '错误',
+      type_en: 'Error',
+      meaning: 'API连接失败，请稍后重试',
+      meaning_en: 'API connection failed, please try again later'
+    }];
   }
 } 

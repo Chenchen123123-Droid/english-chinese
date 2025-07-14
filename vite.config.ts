@@ -16,14 +16,5 @@ export default defineConfig({
         manualChunks: undefined, // 禁用代码分割
       },
     },
-  },
-  server: {
-    proxy: {
-      '/api/deepseek': {
-        target: 'https://api.deepseek.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/deepseek/, ''),
-      },
-    },
-  },
+  }
 });

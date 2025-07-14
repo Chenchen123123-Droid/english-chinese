@@ -14,11 +14,11 @@ interface ChineseName {
 interface ResultsGridProps {
   results: ChineseName[];
   inputName: string;
-  onCopy: (name: string) => void;
+  onCopyName: (name: string) => void;
   copiedName: string;
 }
 
-const ResultsGrid: React.FC<ResultsGridProps> = ({ results, inputName, onCopy, copiedName }) => {
+const ResultsGrid: React.FC<ResultsGridProps> = ({ results, inputName, onCopyName, copiedName }) => {
   const { t } = useLanguage();
   if (results.length === 0) {
     return (
@@ -74,7 +74,7 @@ const ResultsGrid: React.FC<ResultsGridProps> = ({ results, inputName, onCopy, c
               type_en={result.type_en}
               meaning={result.meaning}
               meaning_en={result.meaning_en}
-              onCopy={onCopy}
+              onCopy={onCopyName}
               isCopied={copiedName === result.name}
             />
           </div>
