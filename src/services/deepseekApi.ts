@@ -4,7 +4,10 @@ import axios from 'axios';
 // 使用新的API密钥 - 使用内测版API密钥
 const DEEPSEEK_API_KEY = 'sk-vs9057822df3e2c693e7545603490193';
 // 使用自定义API代理避免CORS问题
-const DEEPSEEK_API_URL = '/api/deepseek-proxy';
+// 根据环境使用不同的API路径
+const DEEPSEEK_API_URL = window.location.hostname === 'localhost' 
+  ? '/api/deepseek-proxy' 
+  : `${window.location.origin}/api/deepseek-proxy`;
 
 // 创建一个axios实例，处理CORS
 const apiClient = axios.create({
